@@ -9,7 +9,7 @@ set1.pcap
     pass: *w00tfu!*
 7. 3 files were transferred
 8. *code.rtf*, *secret.pdf*, *abc.jpg*
-9. 
+9. see attached files
 
 set2.pcap
 =======
@@ -28,6 +28,7 @@ set2.pcap
       for logging into some cisco routers a quick google search shows)
       
 | # | User       | Password     | Source    			       | Destination      | Protocol
+| --- | --- | --- | --- | --- | --- |
 | 1 | cisco      | chris10          | 10.156.15.241:13247   | 200.60.17.1:23 | telnet
 | 2 | cisco      | chelita           | 10.156.15.241:13247   | 200.60.17.1:23 | telnet
 | 3 | cisco      | chayank        | 10.156.15.241:13247   | 200.60.17.1:23 | telnet
@@ -49,6 +50,7 @@ set2.pcap
       Simply use secure protocols and work over an encrypted connection (HTTPS, TLS, SSL, SSH for example).
 19. The list was obtained from Wireshark under Statistics > Address Resolution...
 Host IP | Host
+--- | --- 
 74.125.239.7 | talkgadget.l.google.com
 74.125.239.4 | talkgadget.l.google.com
 74.125.239.6 | talkgadget.l.google.com
