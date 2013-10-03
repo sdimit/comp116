@@ -6,6 +6,7 @@ Currently defaults to interface 'en1'... maybe should pass interface name as a c
 TODO: 
 
 1. code clean up
+2. add FTP credentials warning 
 2. make pass/card# leak & XSS detection smarter if at all possible
 3. moar comments...
 4. more testing
