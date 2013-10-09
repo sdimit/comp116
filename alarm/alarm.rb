@@ -66,21 +66,24 @@ def checkForLeaks(pkt)
 	# this is SMTP. keyword is AUTH LOGIN here
 		alert("SMTP login leaked", pkt) if (/AUTH LOGIN/i.match(pkt.payload)) 
 	else 
-	# we have HTTP stuff 
 		# ... and credit card numbers
 		if (/POST|GET|PUT/i =~ pkt.payload)
-			# this regex courtesy of http://stackoverflow.com/questions/9315647/regex-credit-card-number-tests
+			# this regex with the aid of http://www.regular-expressions.info/creditcard.html
+			# captures more formats than the sans suggested one but requires normalization for dashes
 			creditCardRegEx = /(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})/
+            # alt regex from http://www.sans.org/security-resources/idfaq/snort-detect-credit-card-numbers.php :
+            # /(?:4\d{3}(\s|-)?\d{4}(\s|-)?\d{4}(\s|-)?\d{4})|(?:5\d{3}(\s|-)?\d{4}(\s|-)?\d{4}(\s|-)?\d{4})|(?:6011(\s|-)?\d{4}(\s|-)?\d{4}(\s|-)?\d{4})|(?:3\d{3}(\s|-)?\d{6}(\s|-)?\d{5})/
    			normalizedPayload = pkt.payload.gsub!(/-*\,*/, "") #removing dashes and commas from the payload
 	   		alert("Leaked credit card number", pkt) if (creditCardRegEx.match(normalizedPayload))
    		end
+
    		# check for password leaking over HTTP
    		alert("Logins might leak! POST to an unencrypted (HTTP) page", pkt) if (/post.*http[^s]/i.match(pkt.payload))
    	end # case statement end
 end
 
 def checkForXSS(pkt)
-		# ideas from here https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet
+		# ideas from https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet
 		# this to check if an attack vector has been converted to hexadecimal in the HTML format e.g. &#x0A 
 		# (there could be a trailing ; or not and we could have trailing zeroes, too)
 		attackVectors = ["alert", "javascript", "window.location", "document.referrer", "document.location"]
@@ -108,7 +111,7 @@ packets = cap.stream
 packets.each do |p|
 	pkt = Packet.parse p
 
-	if pkt.is_tcp?
+	if pkt.is_tcp? #check if we have a tcp packet because we look at some tcp flags in scan detection & leaks will happen over tcp/ip
 		checkForScans(pkt)
 		checkForXSS(pkt)
 		checkForLeaks(pkt)
