@@ -1,7 +1,11 @@
 Assignment 2: Incident Alarm with PacketFu
 =======
-Stefan Dimitrov
+--Stefan Dimitrov
 
+Usage:
+------
+  `sudo ruby alarm.rb [ifacename]
+  defaults to an interface named 'en1' unless ifacename is provided
 
 Features: 
 ---------
@@ -10,8 +14,3 @@ Features:
  * scans for several common XSS attacks
  * warns about potential leakage of credit card numbers over HTTP (i.e. via website)
  * able to detect a variety of stealth Nmap scans in adition to more traditional ones
-
-Usage:
-------
-  ``sudo ruby alarm.rb [ifacename]
-  defaults to an interface named 'en1' unless ifacename is provided
