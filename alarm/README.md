@@ -1,10 +1,11 @@
 Assignment 2: Incident Alarm with PacketFu
 =======
---Stefan Dimitrov
+by Stefan Dimitrov
 
 Usage:
 ------
-  `sudo ruby alarm.rb [ifacename]
+  `sudo ruby alarm.rb [ifacename]`
+  
   defaults to an interface named 'en1' unless ifacename is provided
 
 Features: 
