@@ -4,6 +4,7 @@ Stefan Dimitrov
 
 
 Features: 
+---------
  * POP, IMAP, FTP, SMTP login leak detection
  * warns when nonsecure protocols are being used: TELNET, POST/GET over HTTP
  * scans for several common XSS attacks
@@ -11,5 +12,6 @@ Features:
  * able to detect a variety of stealth Nmap scans in adition to more traditional ones
 
 Usage:
+------
   ``sudo ruby alarm.rb [ifacename]
   defaults to an interface named 'en1' unless ifacename is provided
