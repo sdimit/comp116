@@ -1,0 +1,9 @@
+Package: sentry_tweak
+Name: sentry_tweak
+Depends: mobilesubstrate
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: An awesome MobileSubstrate tweak!
+Maintainer: sdimit
+Author: sdimit
+Section: Tweaks
