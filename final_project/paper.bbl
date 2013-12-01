@@ -1,0 +1,67 @@
+\begin{thebibliography}{1}
+
+\bibitem{isam}
+Dimitrios Damopoulos, Georgios Kambourakis, and Stefanos Gritzalis.
+\newblock i{SAM}: {A}n i{P}hone {S}tealth {A}irborne {M}alware.
+\newblock In Jan Camenisch, Simone Fischer-H{\"u}bner, Yuko Murayama, Armand
+  Portmann, and Carlos Rieder, editors, {\em Future Challenges in Security and
+  Privacy for Academia and Industry}, volume 354 of {\em IFIP Advances in
+  Information and Communication Technology}, pages 17--28. Springer Berlin
+  Heidelberg, 2011.
+
+\bibitem{pios}
+Manuel Egele, Christopher Kruegel, Engin Kirda, and Giovanni Vigna.
+\newblock Pi{OS}: Detecting {P}rivacy {L}eaks in i{OS} {A}pplications.
+\newblock In {\em NDSS 2011, 18th Annual Network and Distributed System
+  Security Symposium, 6-9 February 2011, San Diego, CA, USA}, San Diego, USA,
+  02 2011.
+
+\bibitem{kernel}
+Stefan Esser.
+\newblock Exploiting the i{OS} {K}ernel.
+\newblock In {\em Black Hat USA}, 2011.
+
+\bibitem{malware}
+Adrienne~Porter Felt, Matthew Finifter, Erika Chin, Steve Hanna, and David
+  Wagner.
+\newblock A {S}urvey of {M}obile {M}alware in the {W}ild.
+\newblock In {\em Proceedings of the 1st ACM Workshop on Security and Privacy
+  in Smartphones and Mobile Devices}, SPSM '11, pages 3--14, New York, NY, USA,
+  2011. ACM.
+
+\bibitem{attacks}
+Jin Han, SuMon Kywe, Qiang Yan, Feng Bao, Robert Deng, Debin Gao, Yingjiu Li,
+  and Jianying Zhou.
+\newblock Launching {G}eneric {A}ttacks on i{OS} with {A}pproved
+  {T}hird-{P}arty {A}pplications.
+\newblock In Michael Jacobson, Michael Locasto, Payman Mohassel, and Reihaneh
+  Safavi-Naini, editors, {\em Applied Cryptography and Network Security},
+  volume 7954 of {\em Lecture Notes in Computer Science}, pages 272--289.
+  Springer Berlin Heidelberg, 2013.
+
+\bibitem{priv}
+Nicolas Seriot.
+\newblock i{P}hone {P}rivacy.
+\newblock In {\em Black Hat DC}, 2010.
+
+\bibitem{dynamic}
+Martin Szydlowski, Manuel Egele, Christopher Kruegel, and Giovanni Vigna.
+\newblock Challenges for {D}ynamic {A}nalysis of i{OS} {A}pplications.
+\newblock In Jan Camenisch and Dogan Kesdogan, editors, {\em Open Problems in
+  Network Security}, volume 7039 of {\em Lecture Notes in Computer Science},
+  pages 65--77. Springer Berlin Heidelberg, 2012.
+
+\bibitem{jekyll}
+Tielei Wang, Kangjie Lu, Long Lu, Simon Chung, and Wenke Lee.
+\newblock Jekyll on i{OS}: {W}hen {B}enign {A}pps {B}ecome {E}vil.
+\newblock In {\em USENIX Security '13}, 2013.
+
+\bibitem{psios}
+Tim Werthmann, Ralf Hund, Lucas Davi, Ahmad-Reza Sadeghi, and Thorsten Holz.
+\newblock {PS}i{OS}: {B}ring {Y}our {O}wn {P}rivacy \& {S}ecurity to i{OS}
+  {D}evices ({D}istinguished {P}aper {A}ward).
+\newblock In {\em 8th ACM Symposium on Information, Computer and Communications
+  Security (ASIACCS 2013)}, May 2013.
+\newblock Distinguished Paper Award.
+
+\end{thebibliography}

@@ -1,0 +1,94 @@
+\documentclass[12pt, titlepage, oneside]{amsart}
+\usepackage{amsaddr}
+\usepackage{setspace}
+\usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
+%\geometry{landscape}                % Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{epstopdf}
+
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\title{Privacy and Security Benefits of Jailbreaking iOS}
+\author{Stefan Dimitrov}
+\address{sdimit01@tufts.edu}
+%\author{Mentor}
+\author{Ming Chow}
+\address{Mentor}
+
+\author{\today}
+
+%\author{}
+%\date{\today}                                           % Activate to display a given date or no date
+
+%\pagebreak
+\begin{document}
+
+
+\begin{abstract}
+
+The traditional software distribution channel on the iOS platform is Apple's own AppStore, which is known for its stringent app approval policies and quality control. One of the aims of Apple's approval process is to prevent malicious software from reaching its customer base. This preemptive strategy has proven to be relatively successful, but has been criticized for rejecting benign apps that replace or enhance core services. Jailbreaking has opened an alternative outlet for this niche of software offerings by letting users install apps from third party software repositories outside of Apple's regulation, however, this lack of security audit theoretically enables the unhindered distribution of potentially malicious code. Moreover, because jailbreaks exploit a security vulnerabilities within iOS in order to grant apps root privileges and unrestricted filesystem access, they effectively disable several security features in iOS. However, jailbreaking also allows the installation of third-party patches targeting those very vulnerabilities. In addition, jailbreak tweaks that improve privacy control have surfaced in response to controversial AppStore apps that misuse user information, yet pass the approval process. These subtle, but significant differences between the stock and jailbroken flavors of iOS motivate this paper in an attempt to explore the pros and cons of jailbreaking regarding security and privacy.
+
+\end{abstract}.
+
+\maketitle
+
+
+\tableofcontents
+
+\pagebreak
+\doublespacing
+
+\section{Introduction}
+
+\section{To the Community}
+This paper is aimed at iOS researchers and advanced users, and seeks to dispel the notion that jailbreaking is fundamentally insecure. With this paper I hope to raise awareness about the dangerous sense of false security and privacy that comes with Apple's walled garden model of software distribution. 
+
+Jailbreaking can be invaluable when it comes to security and privacy research on the iOS platform. Unrestricted access to the platform's internals and filesystem enables insight into security and privacy strengths and weaknesses, given that iOS is closed source. Moreover, jailbreaking allows researchers to run code unsigned by Apple, use Apple's private frameworks and even patch the OS itself, which can aid in discovering system vulnerabilities and developing fixes for them. 
+
+Privacy and security enhancing software offerings in their essence must be able to modify or access low level system functionality in order to detect apps leaking information or misusing privileges and prevent this from happening. Since apps that access the system internals and private frameworks are strictly forbidden, such apps have only been available to the users of jailbroken iOS devices. 
+
+Considering these important uses of jailbreaking, in this paper I present third-party research that benefits from jailbreaking in evaluating the state of security and privacy on iOS, and showcase useful tools that can improve the security and privacy of jailbroken iOS users.
+\section{Action Items}
+
+\subsection{Threats on the App Store}
+
+The App Store is an integral part of the iOS security model. All applications on the App Store must go through an approval process, one of whose purposes is to prevent malicious apps from reaching users. Prior to submitting an app each developer needs to enroll into the paid Apple Developer Program and disclose their identity. This allows Apple to ban developers caught committing infractions from submitting apps to the App Store. While this might discourage developers of malicious apps under the threat of receiving a permanent ban from the App Store, it would be unwise to believe in the benevolence of developers solely due to the existence of a disincentive to misbehaving. Below I outline researchers' findings on circumventing the approval process and examples of malicious apps on the App Store, in order to expose the reliance on the walled garden model as insufficient with regards to ensuring security and privacy. 
+
+\subsubsection{Sneaking malicious code into the AppStore}
+Since the approval process does not require that developers submit their source code for a review, it is quite possible to use code obfuscation techniques in order to evade any static or dynamic code analysis tools Apple might be using to uncover threats. 
+
+In his paper on iOS privacy\cite{priv}, Nicolas Seriot demonstrates several simple techniques that can be used to deliberately circumvent common types of code analysis likely used by Apple in search of calls to private APIs and system directories. He suggests that his proof-of-concept SpyPhone app\footnote{https://github.com/nst/spyphone/} in fact does not rely on private APIs in the first place, and goes on to express concern that the existence of apps on the App Store collecting personal data is quite likely given the underground demand for and abundance of personal data on iOS devices.
+
+Another group of researchers from Georgia Institute of Technology present\cite{jekyll} their "Jekyll App" which obtained Apple's approval, despite allowing the researchers to remotely launch a variety of attacks on their own tests devices. The paper demonstrates how it is possible to create malicious apps that evade detection by breaking down malicious code into distinct "gadgets" that are not malicious on their own but if  \emph{remotely} supplied the correct execution paths can be assembled intno a malicious routine. 
+
+\cite{attacks}, 
+\subsubsection{Threats to Privacy on the AppStore}
+Even though Apple tests the applications submitted to the App Store for malicious behavior and security risks, it is even harder to check if apps \emph{misuse} user information. While techniques such as dynamic \cite{dynamic} and static \cite{pios} analysis targeted at capturing data flows within the application have been developed, several controversial cases of user data misuse and user profiling have gained attention\footnote{http://mclov.in/2012/02/08/path-uploads-your-entire-address-book-to-their-servers.html}. The problem of course is somewhat intractable, because trusting data to a third party comes with no guarantees about how the data will be used. 
+
+Nevertheless, it is important to make sure that users are given the power to \emph{decide} whether to give their data in the first place. This privacy enhancement feature can be a great complement to pre-existent code approval policies and jailbreaking has allowed for several such data flow management tools. However it wasn't until iOS7 before users were able to control microphone use or limit ad tracking\footnote{http://blogs.wsj.com/digits/2013/09/18/how-to-use-apples-new-ios-7-privacy-controls/} and a dedicated Privacy Settings configuration pane providing consolidated control over the permissions of individual apps has been available only as of iOS6\footnote{https://developer.apple.com/library/ios/releasenotes/General/RN-iOSSDK-6\_0/}. 
+
+\subsection{Jailbreaking for better privacy and security}
+
+\subsection{Jailbreaking for security and privacy research}
+In order to perform any sort of dynamic analysis on a device, root access or at least filesystem access is necessary. Apple does not grant those on unmodified iOS devices and even developers are not granted direct access to the filesystem of the device. Jailbreaking is useful here as it provides researchers with unrestricted access to the OS. 
+A group of researchers from Vienna University of Technology and UC Santa Barbara\cite{dynamic}, developed a method for dynamic analysis that relies on a VNC server for the automation of UI manipulation which is necessary to make sure that all code is being run while testing. Since the App Store restrictions pose technical limitations to implementing VNC servers, only the dynamic analysis method developed can only be used on jailbroken devices. Nevertheless, even more traditional tools such as \texttt{gdb} cannot be installed on iOS unless a jailbreak is in place.
+
+One such vulnerability\footnote{http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2011-0226} in the PDF rendering engine of Apple iOS\cite{pios}, was successfully used to jailbreak earlier version of iOS by allowing the code necessary to obtain elevated privileges run on the device. 
+
+
+\section{Conclusion}
+
+%\subsection{}
+
+\nocite{*} 
+
+\bibliographystyle{plain}
+
+\bibliography{bibliography}
+
+\end{document}  
