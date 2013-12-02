@@ -1,5 +1,5 @@
-\documentclass[12pt, titlepage, oneside]{amsart}
-\usepackage{amsaddr}
+\documentclass[12pt, titlepage, oneside]{article}
+%\usepackage{amsaddr}
 \usepackage{setspace}
 \usepackage{geometry}                % See geometry.pdf to learn the layout options. There are lots.
 \geometry{letterpaper}                   % ... or a4paper or a5paper or ... 
@@ -7,20 +7,31 @@
 %\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{graphicx}
 \usepackage{amssymb}
+\usepackage{hyperref}
 \usepackage{epstopdf}
 
 
-
+\newcommand{\tab}{\hspace*{2em}}
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
 \title{Privacy and Security Benefits of Jailbreaking iOS}
-\author{Stefan Dimitrov}
-\address{sdimit01@tufts.edu}
-%\author{Mentor}
-\author{Ming Chow}
-\address{Mentor}
+%\author{Stefan Dimitrov}
 
-\author{\today}
+\author{
+  Stefan Dimitrov\\
+  \texttt{sdimit01@tufts.edu}
+  %\and
+  \\\\
+  Ming Chow\\
+  \emph{Mentor}
+}
+
+%\address{sdimit01@tufts.edu}
+%\author{Mentor}
+%\author{Ming Chow}
+%\address{Mentor}
+
+%\author{\today}
 
 %\author{}
 %\date{\today}                                           % Activate to display a given date or no date
@@ -28,6 +39,7 @@
 %\pagebreak
 \begin{document}
 
+\maketitle
 
 \begin{abstract}
 
@@ -35,7 +47,6 @@ The traditional software distribution channel on the iOS platform is Apple's own
 
 \end{abstract}.
 
-\maketitle
 
 
 \tableofcontents
@@ -72,7 +83,7 @@ Even though Apple tests the applications submitted to the App Store for maliciou
 
 Nevertheless, it is important to make sure that users are given the power to \emph{decide} whether to give their data in the first place. This privacy enhancement feature can be a great complement to pre-existent code approval policies and jailbreaking has allowed for several such data flow management tools. However it wasn't until iOS7 before users were able to control microphone use or limit ad tracking\footnote{http://blogs.wsj.com/digits/2013/09/18/how-to-use-apples-new-ios-7-privacy-controls/} and a dedicated Privacy Settings configuration pane providing consolidated control over the permissions of individual apps has been available only as of iOS6\footnote{https://developer.apple.com/library/ios/releasenotes/General/RN-iOSSDK-6\_0/}. 
 
-\subsection{Jailbreaking for better privacy and security}
+\tab \subsection{Jailbreaking for better privacy and security}
 
 \subsection{Jailbreaking for security and privacy research}
 In order to perform any sort of dynamic analysis on a device, root access or at least filesystem access is necessary. Apple does not grant those on unmodified iOS devices and even developers are not granted direct access to the filesystem of the device. Jailbreaking is useful here as it provides researchers with unrestricted access to the OS. 
