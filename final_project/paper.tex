@@ -64,13 +64,13 @@ Jailbreaking can be invaluable when it comes to security and privacy research on
 Privacy and security enhancing software offerings in their essence must be able to modify or access low level system functionality in order to detect apps leaking information or misusing privileges and prevent this from happening. Since apps that access the system internals and private frameworks are strictly forbidden, such apps have only been available to the users of jailbroken iOS devices. 
 
 Considering these important uses of jailbreaking, in this paper I present third-party research that benefits from jailbreaking in evaluating the state of security and privacy on iOS, and showcase useful tools that can improve the security and privacy of jailbroken iOS users.
-\section{Action Items}
 
-\subsection{Threats on the App Store}
+
+\section{Threats on the App Store}
 
 The App Store is an integral part of the iOS security model. All applications on the App Store must go through an approval process, one of whose purposes is to prevent malicious apps from reaching users. Prior to submitting an app each developer needs to enroll into the paid Apple Developer Program and disclose their identity. This allows Apple to ban developers caught committing infractions from submitting apps to the App Store. While this might discourage developers of malicious apps under the threat of receiving a permanent ban from the App Store, it would be unwise to believe in the benevolence of developers solely due to the existence of a disincentive to misbehaving. Below I outline researchers' findings on circumventing the approval process and examples of malicious apps on the App Store, in order to expose the reliance on the walled garden model as insufficient with regards to ensuring security and privacy. 
 
-\subsubsection{Sneaking malicious code into the AppStore}
+\subsection{Sneaking malicious code into the AppStore}
 Since the approval process does not require that developers submit their source code for a review, it is quite possible to use code obfuscation techniques in order to evade any static or dynamic code analysis tools Apple might be using to uncover threats. 
 
 In his paper on iOS privacy\cite{priv}, Nicolas Seriot demonstrates several simple techniques that can be used to deliberately circumvent common types of code analysis likely used by Apple in search of calls to private APIs and system directories. He suggests that his proof-of-concept SpyPhone app\footnote{https://github.com/nst/spyphone/} in fact does not rely on private APIs in the first place, and goes on to express concern that the existence of apps on the App Store collecting personal data is quite likely given the underground demand for and abundance of personal data on iOS devices.
@@ -78,12 +78,15 @@ In his paper on iOS privacy\cite{priv}, Nicolas Seriot demonstrates several simp
 Another group of researchers from Georgia Institute of Technology present\cite{jekyll} their "Jekyll App" which obtained Apple's approval, despite allowing the researchers to remotely launch a variety of attacks on their own tests devices. The paper demonstrates how it is possible to create malicious apps that evade detection by breaking down malicious code into distinct "gadgets" that are not malicious on their own but if  \emph{remotely} supplied the correct execution paths can be assembled intno a malicious routine. 
 
 \cite{attacks}, 
-\subsubsection{Threats to Privacy on the AppStore}
+\subsection{Threats to Privacy on the AppStore}
 Even though Apple tests the applications submitted to the App Store for malicious behavior and security risks, it is even harder to check if apps \emph{misuse} user information. While techniques such as dynamic \cite{dynamic} and static \cite{pios} analysis targeted at capturing data flows within the application have been developed, several controversial cases of user data misuse and user profiling have gained attention\footnote{http://mclov.in/2012/02/08/path-uploads-your-entire-address-book-to-their-servers.html}. The problem of course is somewhat intractable, because trusting data to a third party comes with no guarantees about how the data will be used. 
 
 Nevertheless, it is important to make sure that users are given the power to \emph{decide} whether to give their data in the first place. This privacy enhancement feature can be a great complement to pre-existent code approval policies and jailbreaking has allowed for several such data flow management tools. However it wasn't until iOS7 before users were able to control microphone use or limit ad tracking\footnote{http://blogs.wsj.com/digits/2013/09/18/how-to-use-apples-new-ios-7-privacy-controls/} and a dedicated Privacy Settings configuration pane providing consolidated control over the permissions of individual apps has been available only as of iOS6\footnote{https://developer.apple.com/library/ios/releasenotes/General/RN-iOSSDK-6\_0/}. 
 
-\tab \subsection{Jailbreaking for better privacy and security}
+
+
+\section{Action Items}
+\subsection{Jailbreaking for better privacy and security}
 
 \subsection{Jailbreaking for security and privacy research}
 In order to perform any sort of dynamic analysis on a device, root access or at least filesystem access is necessary. Apple does not grant those on unmodified iOS devices and even developers are not granted direct access to the filesystem of the device. Jailbreaking is useful here as it provides researchers with unrestricted access to the OS. 

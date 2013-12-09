@@ -1,9 +1,9 @@
 \contentsline {section}{\numberline {1}Introduction}{2}{section.1}
 \contentsline {section}{\numberline {2}To the Community}{2}{section.2}
-\contentsline {section}{\numberline {3}Action Items}{3}{section.3}
-\contentsline {subsection}{\numberline {3.1}Threats on the App Store}{3}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Sneaking malicious code into the AppStore}{3}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}Threats to Privacy on the AppStore}{4}{subsubsection.3.1.2}
-\contentsline {subsection}{\numberline {3.2}Jailbreaking for better privacy and security}{5}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Jailbreaking for security and privacy research}{5}{subsection.3.3}
-\contentsline {section}{\numberline {4}Conclusion}{6}{section.4}
+\contentsline {section}{\numberline {3}Threats on the App Store}{3}{section.3}
+\contentsline {subsection}{\numberline {3.1}Sneaking malicious code into the AppStore}{3}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Threats to Privacy on the AppStore}{4}{subsection.3.2}
+\contentsline {section}{\numberline {4}Action Items}{5}{section.4}
+\contentsline {subsection}{\numberline {4.1}Jailbreaking for better privacy and security}{5}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Jailbreaking for security and privacy research}{5}{subsection.4.2}
+\contentsline {section}{\numberline {5}Conclusion}{6}{section.5}

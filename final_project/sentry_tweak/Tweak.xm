@@ -25,7 +25,7 @@ the generation of a class list and an automatic constructor.
 - (id)noArguments {
 	%log;
 	id awesome = %orig;
-	[awesome doSomethingElse];
+	[awesome init];
 
 	return awesome;
 }
