@@ -7,9 +7,11 @@ the generation of a class list and an automatic constructor.
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 
-CFOptionFlags didUserAllow(){
+CFOptionFlags didUserAllow(id appInstance){
 
-    CFStringRef title = CFStringCreateWithFormat(kCFAllocatorDefault, NULL, CFSTR("“%@” Would Like To Access Your Camera"), @"This App");
+        //    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+
+    CFStringRef title = CFStringCreateWithFormat(kCFAllocatorDefault, NULL, CFSTR("%@ Would Like To Access Your Camera"), @"appName");
     CFOptionFlags alertResult = kCFUserNotificationDefaultResponse;
         //    BOOL ret = NO;
 
@@ -72,29 +74,17 @@ CFOptionFlags didUserAllow(){
 %hook PLCameraController
 -(BOOL)_setupCamera
 {
-    CFStringRef title = CFStringCreateWithFormat(kCFAllocatorDefault, NULL, CFSTR("“%@” Would Like To Access Your Camera"), @"This App");
-    CFOptionFlags alertResult = kCFUserNotificationDefaultResponse;
-    BOOL ret = NO;
-
-    CFUserNotificationDisplayAlert(0.0, kCFUserNotificationNoteAlertLevel, NULL, NULL, NULL, title, CFSTR("Not all apps recover successfully from having their Camera access revoked."), CFSTR("OK"), CFSTR("Don't Allow"), NULL, &alertResult);
-    CFRelease(title);
-    switch (alertResult) {
+    switch (didUserAllow(self)) {
         case kCFUserNotificationAlternateResponse:
-            ret = NO;
+            return NO;
             break;
         case kCFUserNotificationDefaultResponse:
-            ret = %orig;
+            return %orig;
             break;
         default:
             break;
     }
-
-    //BOOL ret = %orig;
-    //  NSString *message = [NSString stringWithFormat:@"The app has requested to use _setupCamera", nil];
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//    [alert show];
-//    [alert release];
- return ret;
+    return NO;
 }
 %end
 
@@ -103,30 +93,15 @@ CFOptionFlags didUserAllow(){
 %hook PLCameraController
 -(void)_previewStarted:(id)started
 {
-    switch (didUserAllow()) {
+    switch (didUserAllow(self)) {
         case kCFUserNotificationAlternateResponse:
-                //  ret = NO;
             break;
         case kCFUserNotificationDefaultResponse:
-            //ret =
             %orig;
             break;
         default:
             break;
     }
-
-        //BOOL ret = %orig;
-        //  NSString *message = [NSString stringWithFormat:@"The app has requested to use _setupCamera", nil];
-        //    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        //    [alert show];
-        //    [alert release];
-        //   return ret;
-//
-//    NSString *message = [NSString stringWithFormat:@"The app has requested to use _previewStarted", nil];
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//    [alert show];
-//    [alert release];
-//    %orig;
 }
 %end
 
@@ -134,10 +109,18 @@ CFOptionFlags didUserAllow(){
 %hook PLCameraController
 -(void)autofocus
 {
-    NSString *message = [NSString stringWithFormat:@"The app has requested to use -(void)autofocus", nil];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+
+    switch (didUserAllow(self)) {
+        case kCFUserNotificationAlternateResponse:
+            break;
+        case kCFUserNotificationDefaultResponse:
+            %orig;
+            break;
+        default:
+            break;
+    }
+    
+
 }
 %end
 
@@ -147,12 +130,21 @@ CFOptionFlags didUserAllow(){
 %hook AVCapture
 - (id)initWithCaptureMode:(id)arg1 qualityPreset:(id)arg2
 {
-    NSString *appName = [self displayName];
-    NSString *message = [NSString stringWithFormat:@"The app %@ has requested to use - (id)initWithCaptureMode:(id)arg1 qualityPreset:(id)arg2", appName, nil];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:appName message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
-    return %orig;
+
+
+    switch (didUserAllow(self)) {
+        case kCFUserNotificationAlternateResponse:
+            break;
+        case kCFUserNotificationDefaultResponse:
+            return %orig;
+            break;
+        default:
+            break;
+    }
+
+    return nil;
+
+        //    NSString *appName = [self displayName];
 }
 %end
 
@@ -162,12 +154,18 @@ CFOptionFlags didUserAllow(){
 
 - (void)takePicture
 {
-        //   NSString *appName = [self displayName];
-    NSString *message = [NSString stringWithFormat:@"The UIImagePickerController used takePicture", nil];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
-    %orig;
+
+    switch (didUserAllow(self)) {
+        case kCFUserNotificationAlternateResponse:
+            break;
+        case kCFUserNotificationDefaultResponse:
+            %orig;
+            break;
+        default:
+            break;
+    }
+    
+
 }
 
 %end
@@ -178,23 +176,37 @@ CFOptionFlags didUserAllow(){
 %hook AVRecorder
 - (BOOL)takePhoto
 {
-    NSString *appName = [self displayName];
-    NSString *message = [NSString stringWithFormat:@"The app %@ has requested to use - (BOOL)takePhoto", appName, nil];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:appName message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
-    return %orig;
+
+    switch (didUserAllow(self)) {
+        case kCFUserNotificationAlternateResponse:
+            return NO;
+            break;
+        case kCFUserNotificationDefaultResponse:
+            return %orig;
+            break;
+        default:
+            break;
+    }
+
+    return NO;
+
 }
 %end
 
 %hook AVCapture
 - (BOOL)capturePhoto:(id)arg1
 {
-    NSString *appName = [self displayName];
-    NSString *message = [NSString stringWithFormat:@"The app %@ has requested to use - (BOOL)capturePhoto:(id)arg1", appName, nil];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:appName message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+    switch (didUserAllow(self)) {
+        case kCFUserNotificationAlternateResponse:
+            return NO;
+            break;
+        case kCFUserNotificationDefaultResponse:
+            return %orig;
+            break;
+        default:
+            break;
+    }
+
     return NO;
 }
 %end
@@ -202,11 +214,17 @@ CFOptionFlags didUserAllow(){
 %hook AVCapture
 - (BOOL)capturePhoto
 {
-    NSString *appName = [self displayName];
-    NSString *message = [NSString stringWithFormat:@"The app %@ has requested to use - (BOOL)capturePhoto", appName, nil];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:appName message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+    switch (didUserAllow(self)) {
+        case kCFUserNotificationAlternateResponse:
+            return NO;
+            break;
+        case kCFUserNotificationDefaultResponse:
+            return %orig;
+            break;
+        default:
+            break;
+    }
+
     return NO;
 }
 %end
@@ -214,11 +232,15 @@ CFOptionFlags didUserAllow(){
 %hook AVCapture
 - (void)setSourceCamera:(id)arg1
 {
-    NSString *appName = [self displayName];
-    NSString *message = [NSString stringWithFormat:@"The app %@ has requested to use - (void)setSourceCamera:(id)arg1", appName, nil];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:appName message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+    switch (didUserAllow(self)) {
+        case kCFUserNotificationAlternateResponse:
+            break;
+        case kCFUserNotificationDefaultResponse:
+            %orig;
+            break;
+        default:
+            break;
+    }
 }
 %end
 
@@ -227,11 +249,18 @@ CFOptionFlags didUserAllow(){
 %hook AVCaptureOutput
 - (AVCaptureConnection *)connectionWithMediaType:(NSString *)mediaType
 {
-    NSString *message = [NSString stringWithFormat:@"The app has requested to use - (AVCaptureConnection *)connectionWithMediaType:(NSString *)mediaType with argument: '%@'", mediaType, nil];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
-    return %orig;
+    switch (didUserAllow(self)) {
+        case kCFUserNotificationAlternateResponse:
+            return nil;
+            break;
+        case kCFUserNotificationDefaultResponse:
+                //    return %orig;
+            break;
+        default:
+            break;
+    }
+
+    return nil;
 }
 %end
 

@@ -1,10 +1,10 @@
-Package: com.yourcompany.laina
-Name: laina
+Package: com.comp116.CameraSentry
+Name: CameraSentry
 Depends: mobilesubstrate
 Architecture: iphoneos-arm
-Description: An awesome MobileSubstrate tweak!
+Description: A MobileSubstrate tweak that ask the user for permission whenever camera access is attempted by apps.
 Maintainer: Stefan Dimitrov
 Author: Stefan Dimitrov
 Section: Tweaks
-Version: 0.0.1-53
+Version: 0.0.1-5
 Installed-Size: 48

@@ -5,5 +5,6 @@
 \contentsline {section}{\numberline {5}Threats of Jailbreaking}{7}{section.5}
 \contentsline {section}{\numberline {6}Action Items}{7}{section.6}
 \contentsline {subsection}{\numberline {6.1}Jailbreaking for better privacy}{7}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Jailbreaking for security and privacy research}{7}{subsection.6.2}
-\contentsline {section}{\numberline {7}Conclusion}{8}{section.7}
+\contentsline {subsection}{\numberline {6.2}Changing the default iOS root password}{7}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Jailbreaking for security and privacy research}{8}{subsection.6.3}
+\contentsline {section}{\numberline {7}Conclusion}{9}{section.7}
