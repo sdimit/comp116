@@ -1,0 +1,10 @@
+Package: com.yourcompany.laina
+Name: laina
+Depends: mobilesubstrate
+Architecture: iphoneos-arm
+Description: An awesome MobileSubstrate tweak!
+Maintainer: Stefan Dimitrov
+Author: Stefan Dimitrov
+Section: Tweaks
+Version: 0.0.1-53
+Installed-Size: 48
