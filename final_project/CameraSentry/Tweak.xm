@@ -6,18 +6,115 @@ the generation of a class list and an automatic constructor.
 #import <SpringBoard/SpringBoard.h>
 #import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
+#include <pthread.h>
+    //#import <AppSupport/CPDistributedMessagingCenter.h>
+    //#import <AppSupport/AppSupport.h>
+#import <Foundation/Foundation.h>
+#include <substrate.h>
+
+@class CPDistributedMessagingCenter;
+static CFErrorRef blockedError;
+static CFArrayRef emptyArray;
+static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+static CPDistributedMessagingCenter *center;
+
+#define kSettingsPath @"/var/mobile/Library/Preferences/com.comp116.CameraSentry"
+static NSMutableDictionary *settings;
+
+__attribute__((visibility("hidden")))
+@interface ContactPrivacySpringBoardHandler : NSObject
+@end
+
+@implementation ContactPrivacySpringBoardHandler
+
++ (NSDictionary *)settings
+{
+	return [[settings copy] autorelease];
+}
+
+- (NSDictionary *)getValueForMessage:(NSString *)message userInfo:(NSDictionary *)userInfo
+{
+	id result = [settings objectForKey:[userInfo objectForKey:@"key"]];
+	return result ? [NSDictionary dictionaryWithObject:result forKey:@"value"] : [NSDictionary dictionary];
+}
+
+- (void)setValueForMessage:(NSString *)message userInfo:(NSDictionary *)userInfo
+{
+	id key = [userInfo objectForKey:@"key"];
+	if (key) {
+		id value = [userInfo objectForKey:@"value"];
+		if (value)
+			[settings setObject:value forKey:key];
+		else
+			[settings removeObjectForKey:key];
+		NSData *data = [NSPropertyListSerialization dataFromPropertyList:settings format:NSPropertyListBinaryFormat_v1_0 errorDescription:nil];
+		[data writeToFile:kSettingsPath atomically:YES];
+	}
+}
+
+@end
+
+static void LoadSettings()
+{
+	[settings release];
+	settings = [[NSMutableDictionary alloc] initWithContentsOfFile:kSettingsPath] ?: [[NSMutableDictionary alloc] init];
+}
+
+%ctor {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    center = (CPDistributedMessagingCenter*) [[objc_getClass("CPDistributedMessagingCenter") centerNamed:@"com.comp116.CameraSentry.springboard"] retain];
+        //	center = [[messagingCenter centerNamed:@"com.comp116.CameraSentry.springboard"] retain];
+	if (dlopen("/System/Library/CoreServices/SpringBoard.app/SpringBoard", RTLD_NOLOAD)) {
+		[center runServerOnCurrentThread];
+		ContactPrivacySpringBoardHandler *sbh = [[ContactPrivacySpringBoardHandler alloc] init];
+		[center registerForMessageName:@"get" target:sbh selector:@selector(getValueForMessage:userInfo:)];
+		[center registerForMessageName:@"set" target:sbh selector:@selector(setValueForMessage:userInfo:)];
+		CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)LoadSettings, CFSTR("com.comp116.CameraSentry.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
+		LoadSettings();
+	} else {
+		if ([[[NSBundle mainBundle] bundlePath] hasPrefix:@"/var/mobile/Applications/"]) {
+			blockedError = CFErrorCreate(kCFAllocatorDefault, CFSTR("com.comp116.CameraSentry"), 0, NULL);
+			const void *value = NULL;
+			emptyArray = CFArrayCreate(kCFAllocatorDefault, &value, 0, &kCFTypeArrayCallBacks);
+		}
+	}
+	[pool drain];
+}
+
 
 CFOptionFlags didUserAllow(id appInstance){
 
-        //    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+        //  const char *appName = [[[NSBundle mainBundle] //objectForInfoDictionaryKey:@"CFBundleDisplayName"] UTF8String];
+    pthread_mutex_lock(&mutex);
+    CFBundleRef mainBundle = CFBundleGetMainBundle();
 
-    CFStringRef title = CFStringCreateWithFormat(kCFAllocatorDefault, NULL, CFSTR("%@ Would Like To Access Your Camera"), @"appName");
+    CFStringRef identifier = CFBundleGetIdentifier(mainBundle);
+
+    NSString *key = [NSString stringWithFormat:@"CPAllowed-%@", identifier];
+    id value = [[center sendMessageAndReceiveReplyName:@"get" userInfo:[NSDictionary dictionaryWithObject:key forKey:@"key"]] objectForKey:@"value"];
+    if (!value) {
+
+    CFStringRef displayName
+        =  (CFStringRef) CFBundleGetValueForInfoDictionaryKey(mainBundle, CFSTR("CFBundleDisplayName"))
+        ?: (CFStringRef) CFBundleGetValueForInfoDictionaryKey(mainBundle, CFSTR("CFBundleName"))
+        ?: CFSTR("Unknown");
+
+    CFStringRef title = CFStringCreateWithFormat(kCFAllocatorDefault, NULL, CFSTR("%@ wants to access your camera"), displayName);
     CFOptionFlags alertResult = kCFUserNotificationDefaultResponse;
         //    BOOL ret = NO;
 
-    CFUserNotificationDisplayAlert(0.0, kCFUserNotificationNoteAlertLevel, NULL, NULL, NULL, title, CFSTR("Not all apps recover successfully from having their Camera access revoked."), CFSTR("OK"), CFSTR("Don't Allow"), NULL, &alertResult);
+
+    CFUserNotificationDisplayAlert(0.0, kCFUserNotificationNoteAlertLevel, NULL, NULL, NULL, title, CFSTR("Do you want to allow this?"), CFSTR("OK"), CFSTR("Don't Allow"), NULL, &alertResult);
     CFRelease(title);
 
+
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                              key, @"key",
+                              1
+                              nil];
+    [center sendMessageName:@"set" userInfo:userInfo];
+    pthread_mutex_unlock(&mutex);
+    }
     return alertResult;
 }
 
