@@ -1,0 +1,6 @@
+We need to setup the jailbreak app/tweak development environment THEOS. It can be found on GitHub under rpetrich alongside instructions for setting up.
+
+1. In order to test on a device easily export an environment variable with an SSH enabled device’s IP:
+export THEOS_DEVICE_IP=127.0.0.1
+
+2. Next, compile with ‘make package’ followed by ‘make install’. ‘make install’ will install the package on the device over SSH and restart the springboard.

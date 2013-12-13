@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.10.31)  10 DEC 2013 02:44
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.10.31)  13 DEC 2013 16:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -335,49 +335,51 @@ been already used, duplicate ignored
                    \relax 
 l.55 \doublespacing
                     [1] [2] [3] [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 92--92
+Underfull \hbox (badness 10000) in paragraph at lines 88--88
 [][][]\OT1/cmr/m/n/10 http://www.idownloadblog.com/2013/10/20/how-to-use-freque
 nt-locations-and-next-
  []
 
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 105--105
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--93
 [][][]\OT1/cmr/m/n/10 http://www.ftc.gov/news-events/press-releases/2013/02/pat
 h-social-networking-app-settles-
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 109
-.
-LaTeX Font Info:    No file OMScmtt.fd. on input line 109.
+[6]
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 99.
+
+LaTeX Font Info:    No file OMScmtt.fd. on input line 99.
+
 
 LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbackslash' on input line 109.
+(Font)              for symbol `textbackslash' on input line 99.
 
-[7] [8] [9] (./paper.bbl [10]
+[7] [8] [9] [10] (./paper.bbl [11]
 Underfull \hbox (badness 10000) in paragraph at lines 49--54
 []\OT1/cmr/m/n/12 Keith Lee.  iPhone Es-pi-onage.  \OT1/cmr/m/it/12 http://reve
 rse.put.as/wp-
  []
 
 )
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 131.
- [11]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 131.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 122.
+ [12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 122.
  (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 131.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 131.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 122.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 122.
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 771C78B39B0807225CF49561ADDDAA13;656.
+(rerunfilecheck)             Checksum: 7764EE79E5952515F7CA69E512DAC8FE;782.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 131.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 122.
  ) 
 Here is how much of TeX's memory you used:
  5935 strings out of 494536
- 87726 string characters out of 6167445
+ 87732 string characters out of 6167445
  170579 words of memory out of 5000000
  9081 multiletter control sequences out of 15000+600000
  14080 words of font info for 55 fonts, out of 8000000 for 9000
@@ -393,10 +395,10 @@ sfonts/cm/cmr8.pfb></usr/local/texlive/2013basic/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmsy10.pfb></usr/local/texlive/2013basic/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmti12.pfb></usr/local/texlive/2013basic/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmtt12.pfb>
-Output written on paper.pdf (13 pages, 140210 bytes).
+Output written on paper.pdf (14 pages, 138064 bytes).
 PDF statistics:
- 202 PDF objects out of 1000 (max. 8388607)
- 176 compressed objects within 2 object streams
+ 206 PDF objects out of 1000 (max. 8388607)
+ 179 compressed objects within 2 object streams
  45 named destinations out of 1000 (max. 500000)
- 81 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 89 words of extra memory for PDF output out of 10000 (max. 10000000)
 
