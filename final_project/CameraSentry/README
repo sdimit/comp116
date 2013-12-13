@@ -4,3 +4,5 @@ We need to setup the jailbreak app/tweak development environment THEOS. It can b
 export THEOS_DEVICE_IP=127.0.0.1
 
 2. Next, compile with ‘make package’ followed by ‘make install’. ‘make install’ will install the package on the device over SSH and restart the springboard.
+
+Currently the tweak might request permissions several times since apps call the several different methods many times while setting up the camera. However, this is a proof of concept app so this was not implemented in an effort to keep code simple and avoid distracting features like saving the permissions state for individual applications.
