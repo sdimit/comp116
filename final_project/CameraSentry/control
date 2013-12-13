@@ -1,9 +1,0 @@
-Package: com.comp116.CameraSentry
-Name: CameraSentry
-Depends: mobilesubstrate
-Version: 0.0.1
-Architecture: iphoneos-arm
-Description: A MobileSubstrate tweak that ask the user for permission whenever camera access is attempted by apps.
-Maintainer: Stefan Dimitrov
-Author: Stefan Dimitrov
-Section: Tweaks
