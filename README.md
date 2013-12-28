@@ -1,6 +1,4 @@
-comp116-sdimitrov
+COMP116 (Computer Security)
 =================
 
-COMP116 Repo (Computer Security). 
-
-Contains my completed assignments for the course.
+Contains my all of my COMP 116 coursework.
